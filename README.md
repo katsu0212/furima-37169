@@ -1,5 +1,3 @@
-# README
-
 # users テーブル
 
 | Column             | Type   | Options                   |
@@ -17,21 +15,18 @@
 
 - has_many :items
 - has_many :purchases
-- has_one  :sending_destinations
-
 
 ## items
 
 | Column             | Type       | Options                         |
 | ------------------ | ---------- | ------------------------------- |
-| image              | string     | null: false                     |
 | name               | string     | null: false                     |
 | introduction       | text       | null: false                     |
-| category           | string     | null: false                     |
-| status             | string     | null: false                     |
-| postage            | integer    | null: false                     |
-| region             | string     | null: false                     |
-| preparation_day    | integer    | null: false                     |
+| category_id        | string     | null: false                     |
+| item_condition_id  | integer    | null: false                     |
+| postage_id         | integer    | null: false                     |
+| region_id          | integer    | null: false                     |
+| preparation_day_id | integer    | null: false                     |
 | price              | integer    | null: false                     |
 | user               | references | null: false, foreign_key: true  |
 
@@ -39,8 +34,6 @@
 
 - belongs_to :user
 - has_one :purchase
-
-
 
 ## purchases
 
@@ -60,19 +53,15 @@
 
 | Column             | Type       | Options                         |
 | ------------------ | ---------- | ------------------------------- |
-| postcode           | string     | null: false                     |
-| prefecture         | string     | null: false                     |
+| post_code          | string     | null: false                     |
+| region_id          | integer    | null: false                     |
 | city               | string     | null: false                     |
 | block              | string     | null: false                     |
 | building_name      | string     |                                 |
-| phone_number       | integer    | null: false                     |
-| user               | references | null: false, foreign_key: true  |
+| phone_number       | string     | null: false                     |
 
 ##  Association
 
-- belongs_to :purchase
-- belongs_to :user
-
-
+- has_many  :purchase
 
 
