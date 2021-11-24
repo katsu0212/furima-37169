@@ -33,7 +33,7 @@
 ##  Association
 
 - belongs_to :user
-- belongs_to :purchase
+- has_one :purchase
 
 ## purchases
 
@@ -46,8 +46,8 @@
 ##  Association
 
 - belongs_to :user
-- has_one :item
-- has_one :sending_destinations
+- belongs_to :item
+- has_one :sending_destination
 
 ## sending_destinations
 
@@ -59,9 +59,11 @@
 | block              | string     | null: false                     |
 | building_name      | string     |                                 |
 | phone_number       | string     | null: false                     |
+| purchase           | references | null: false, foreign_key: true  |
+
 
 ##  Association
 
-- has_many  :purchase
+- belongs_to  :purchase
 
 
