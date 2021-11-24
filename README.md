@@ -22,7 +22,7 @@
 | ------------------ | ---------- | ------------------------------- |
 | name               | string     | null: false                     |
 | introduction       | text       | null: false                     |
-| category_id        | string     | null: false                     |
+| category_id        | integer    | null: false                     |
 | item_condition_id  | integer    | null: false                     |
 | postage_id         | integer    | null: false                     |
 | region_id          | integer    | null: false                     |
@@ -33,7 +33,7 @@
 ##  Association
 
 - belongs_to :user
-- has_one :purchase
+- belongs_to :purchase
 
 ## purchases
 
@@ -47,7 +47,7 @@
 
 - belongs_to :user
 - has_one :item
-- belongs_to :sending_destinations
+- has_one :sending_destinations
 
 ## sending_destinations
 
