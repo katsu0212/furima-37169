@@ -6,7 +6,7 @@
 | encrypted_password | string | null: false               |
 | last_name          | string | null: false               |
 | first_name         | string | null: false               |
-| first_name_kana    | string | null: false               |
+| last_name_kana    | string | null: false               |
 | first_name_kana    | string | null: false               |
 | nickname           | string | null: false               |
 | birthday           | date   | null: false               |
