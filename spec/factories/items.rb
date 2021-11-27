@@ -9,7 +9,6 @@ FactoryBot.define do
     region_id           {2}
     preparation_day_id  {2}
     price               {500}
-    user_id             {2}
     association :user
 
     after(:build) do |item|
