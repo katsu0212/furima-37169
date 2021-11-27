@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :move_to_index, only: [:new]
+
   def index
     @item = Item.all
   end
@@ -21,5 +23,11 @@ class ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit(:image, :name, :introduction, :category_id, :item_condition_id, :postage_id, :region_id, :preparation_day_id, :price).merge(user_id: current_user.id)
+  end
+
+  def move_to_index
+    unless user_signed_in?
+      redirect_to action: :index
+    end
   end
 end
