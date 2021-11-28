@@ -69,7 +69,6 @@ RSpec.describe User, type: :model do
         @user.password = 'アイウ1234'
         @user.password_confirmation ='アイウ1234'
         @user.valid?
-        binding.pry
         expect(@user.errors.full_messages).to include("Password is invalid")
       end 
 
