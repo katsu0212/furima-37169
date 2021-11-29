@@ -1,6 +1,6 @@
 class UserItem
   include ActiveModel::Model
-  attr_accessor :nickname, :email, :encripted_password, :last_name, :first_name, :last_name_kana, :first_name_kana, :birthday, :image, :name, :introduction, :category_id, :item_condition_id, :postage_id, :region_id, :preparation_day_id, :price, :post_code, :region_id, :city, :block, :building_name, :phone_number
+  attr_accessor :nickname, :email, :encripted_password, :last_name, :first_name, :last_name_kana, :first_name_kana, :birthday, :image, :name, :introduction, :category_id, :item_condition_id, :postage_id, :region_id, :preparation_day_id, :price, :post_code, :region_id, :city, :block, :building_name, :phone_number,:user_id
 
   with_options presence: true do
     validates :name          
@@ -24,6 +24,11 @@ class UserItem
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX
 
+  def save
+    item = Item.create(nickname: nickname, email: email, encripted_password: encripted_password, last_name: last_name, first_name: first_name, last_name_kana: last_name_kana, first_name_kana: first_name_kana, birthday: birthday,image: image, name: name, introduction: introduction, category_id: category_id, item_condition_id: item_condition_id, postage_id: postage_id, region_id: region_id, preparation_day_id: preparation_day_id, price: price, user_id: user_id)
+
+    User.create(post_code: post_code, region_id: region_id, city: city, block: block, building_name: building_name, phone_number: phone_number)
+  end
 
 end
 
