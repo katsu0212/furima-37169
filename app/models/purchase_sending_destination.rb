@@ -1,4 +1,4 @@
-class UserItem
+class PurchaseSendingDestination
   include ActiveModel::Model
   attr_accessor :nickname, :email, :encripted_password, :last_name, :first_name, :last_name_kana, :first_name_kana, :birthday, :image, :name, :introduction, :category_id, :item_condition_id, :postage_id, :region_id, :preparation_day_id, :price, :post_code, :region_id, :city, :block, :building_name, :phone_number,:user_id
 
@@ -25,9 +25,11 @@ class UserItem
   validates_format_of :password, with: PASSWORD_REGEX
 
   def save
-    item = Item.create(nickname: nickname, email: email, encripted_password: encripted_password, last_name: last_name, first_name: first_name, last_name_kana: last_name_kana, first_name_kana: first_name_kana, birthday: birthday,image: image, name: name, introduction: introduction, category_id: category_id, item_condition_id: item_condition_id, postage_id: postage_id, region_id: region_id, preparation_day_id: preparation_day_id, price: price, user_id: user_id)
+    item = Item.create(image: image, name: name, introduction: introduction, category_id: category.id, item_condition_id: item_condition.id, postage_id: postage.id, region_id: region.id, preparation_day_id: preparation_day.id, price: price, user_id: user.id)
+    SendingDestination.create(post_code: post_code, region_id: region_id, city: city, block: block, building_name: building_name, phone_number: phone_number)
+    Purchase.create(user_id: user.id, item_id: item.id)
 
-    User.create(post_code: post_code, region_id: region_id, city: city, block: block, building_name: building_name, phone_number: phone_number)
+    User.create(nickname: nickname, email: email, encripted_password: encripted_password, last_name: last_name, first_name: first_name, last_name_kana: last_name_kana, first_name_kana: first_name_kana, birthday: birthday)
   end
 
 end
