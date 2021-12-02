@@ -34,6 +34,12 @@ describe '商品の購入'  do
       expect(@purchase_sending_destination.errors.full_messages).to include("Post code Enter it as follows (e.g. 123-4567)")
     end
 
+    it "post_codeが半角ハイフンを含む形でなければ購入できない" do
+      @purchase_sending_destination.post_code=1234567
+      @purchase_sending_destination.valid?
+      expect(@purchase_sending_destination.errors.full_messages).to include("Post code Enter it as follows (e.g. 123-4567)")
+    end
+
     it "region_idが空だと購入できない" do
       @purchase_sending_destination.region_id=nil
       @purchase_sending_destination.valid?
@@ -56,11 +62,22 @@ describe '商品の購入'  do
     it "phone_numberが空だと購入できない" do
       @purchase_sending_destination.phone_number=nil
       @purchase_sending_destination.valid?
-      expect(@purchase_sending_destination.errors.full_messages).to include("Phone number can't be blank","Phone number is too short","Phone number is invalid. Input only number")
+      expect(@purchase_sending_destination.errors.full_messages).to include("Phone number can't be blank","Phone number is too short")
     end
 
-    it "phone_numberは10桁以上11桁以内の半角数値でないと購入できない" do
+    it "phone_numberに半角数字以外が含まれている場合は購入できない" do
+      @purchase_sending_destination.phone_number="abcdefghijk"
+      @purchase_sending_destination.valid?
+      expect(@purchase_sending_destination.errors.full_messages).to include("Phone number is invalid. Input only number")
+    end
+
+    it "phone_numberは9桁以下では購入できない" do
       @purchase_sending_destination.phone_number="1234567"
+      @purchase_sending_destination.valid?
+      expect(@purchase_sending_destination.errors.full_messages).to include("Phone number is too short")
+    end
+    it "phone_numberは12桁以上では購入できない" do
+      @purchase_sending_destination.phone_number="123456789012"
       @purchase_sending_destination.valid?
       expect(@purchase_sending_destination.errors.full_messages).to include("Phone number is too short")
     end
@@ -70,6 +87,18 @@ describe '商品の購入'  do
       @purchase_sending_destination.valid?
       expect(@purchase_sending_destination.errors.full_messages).to include("Token can't be blank")
     end
+    it "userが紐付いていなければ購入できない" do
+      @purchase_sending_destination.user_id=nil
+      @purchase_sending_destination.valid?
+      expect(@purchase_sending_destination.errors.full_messages).to include("User can't be blank")
+    end
+    it "itemが紐付いていなければ購入できない" do
+      @purchase_sending_destination.item_id=nil
+      @purchase_sending_destination.valid?
+      expect(@purchase_sending_destination.errors.full_messages).to include("Item can't be blank")
+    end
+    
+    
   end
-  end
+end
 
