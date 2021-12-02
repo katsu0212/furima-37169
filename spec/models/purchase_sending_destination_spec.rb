@@ -10,7 +10,7 @@ end
 
 describe '商品の購入'  do
   context '商品の購入ができる場合'  do
-    it "post_code,region,city,block,phone_numberが正しく入力されている," do
+    it "post_code,region,city,block,phone_number,tokenが正しく入力されてい入力されていれば購入出来る" do
       expect(@purchase_sending_destination).to be_valid
     end
 
@@ -18,6 +18,7 @@ describe '商品の購入'  do
       @purchase_sending_destination.building_name=nil
       expect(@purchase_sending_destination).to be_valid
     end
+
   end
 
   context '商品の購入ができない場合'
@@ -59,6 +60,15 @@ describe '商品の購入'  do
     end
 
     it "phone_numberは10桁以上11桁以内の半角数値でないと購入できない" do
+      @purchase_sending_destination.phone_number="1234567"
+      @purchase_sending_destination.valid?
+      expect(@purchase_sending_destination.errors.full_messages).to include("Phone number is too short")
+    end
+    
+    it "tokenが空では購入できない" do
+      @purchase_sending_destination.token=nil
+      @purchase_sending_destination.valid?
+      expect(@purchase_sending_destination.errors.full_messages).to include("Token can't be blank")
     end
   end
   end

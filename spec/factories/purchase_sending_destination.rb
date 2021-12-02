@@ -6,5 +6,6 @@ FactoryBot.define do
     block       {"仙波町"}
     building_name {"ハイツ川越"}
     phone_number  {"08012345678"}
+    token       {"tok_abcdefghijk00000000000000000"}
   end
 end
