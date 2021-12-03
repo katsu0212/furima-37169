@@ -67,3 +67,4 @@
 - belongs_to  :purchase
 
 
+20211126055339_create_active_storage_tables.active_storage.rb
