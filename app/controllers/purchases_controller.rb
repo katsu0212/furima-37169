@@ -1,8 +1,9 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: [:index]
+  before_action :set_item, only:[:index, :create]
   before_action :item_set,  only:[:index]
   before_action :item_self,  only:[:index]
-  before_action :set_item, only:[:index, :create]
+  
 
   def index
     @purchase_sending_destination = PurchaseSendingDestination.new
